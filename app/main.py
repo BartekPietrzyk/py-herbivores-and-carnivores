@@ -1,13 +1,17 @@
 class Animal:
     alive = []
 
-    def __init__(self, name: str, health: str = 100,
+    def __init__(self, name: str, health: int = 100,
                  hidden: bool = False) -> None:
         self.name = name
         self.health = health
         self.hidden = hidden
-        if self.health > 0:
+        if self.health > 0 and self not in Animal.alive:
             Animal.alive.append(self)
+
+    def check_health(self) -> None:
+        if self.health <= 0 and self in Animal.alive:
+            Animal.alive.remove(self)
 
     def animal_alive(self) -> bool:
         return self.health > 0
